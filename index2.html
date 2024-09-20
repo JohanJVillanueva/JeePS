@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Website</title>
+  <!-- Import Materialize CSS -->
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<body onload="startTime()">
+</head>
+
+<style>
+    body {
+  /* The image used */
+  background-image: url("bg.png");
+
+}
+#txt{
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    text-align: center;
+}
+  /* Slideshow  */
+.slideshow-container {
+  max-width: 370px;
+  position: relative;
+  margin: auto;
+  
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  padding-bottom: 10px;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #ff0000;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+.scrolling-text {
+    animation: scroll 10s linear infinite; /* Animation for scrolling text */
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: visible; /* Hides overflowing text outside the container */
+    text-align: center; /* Centers text horizontally */
+    margin: 0 20px; /* Adds some padding from the edges */
+    color: white; /* Adjust color as needed */
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+</style>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center"><b>JeePS</b></a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="card-panel yellow" id="txt" style="color: maroon;border-radius: 20px; font-size: 30px;text-align: center;"></div>
+  
+
+  <div class="card-panel teal lighten-2" style="border-radius: 20px;">
+
+    <div class="slideshow-container">
+
+        <div class="mySlides fade">
+          <div class="numbertext">1 / 3</div>
+          <img src="adsample1.png" style="width:100%">
+        </div>
+        
+        <div class="mySlides fade">
+          <div class="numbertext">2 / 3</div>
+          <img src="adsample2.png" style="width:100%">
+        </div>
+        
+        <div class="mySlides fade">
+          <div class="numbertext">3 / 3</div>
+          <img src="adsample3.png" style="width:100%">
+        </div>  
+        
+        </div>
+        <br>
+        
+        <div style="text-align:center">
+          <span class="dot"></span> 
+          <span class="dot"></span> 
+          <span class="dot"></span> 
+        </div>
+        
+
+
+
+  </div>
+</div>
+  <!-- Import Materialize JavaScript -->
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}    
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+    setTimeout(showSlides, 7000); // Change image every 2 seconds
+    }
+
+
+
+    function startTime() {
+      const today = new Date();
+      let h = today.getHours();
+      let m = today.getMinutes();
+      let s = today.getSeconds();
+      const day = today.getDate();
+      const month = today.getMonth() + 1; // Months are zero-based
+      const year = today.getFullYear();
+  
+      // Convert to 12-hour format and add AM/PM
+      const amPm = h >= 12 ? "PM" : "AM";
+      h = h % 12 || 12; // Get hour in 12-hour format (12 if 0)
+  
+      // Add leading zeros and format the clock string
+      m = checkTime(m);
+      s = checkTime(s);
+      const timeString = `${h}:${m}:${s} ${amPm}`;
+      const dateString = `${month}/${day}/${year}`;
+  
+      document.getElementById('txt').innerHTML = `<b> Date: ${dateString}    <br> Time: ${timeString} </b>`;
+      setTimeout(startTime, 1000);
+    }
+  
+    function checkTime(i) {
+      if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+      return i;
+    }
+  
+    startTime(); // Call the function to initiate the clock
+
+
+
+  </script>
+</body><br>
+
+<footer class="page-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <H3 class="scrolling-text">Your Text Here. This text will scroll continuously.</h3>
+        </div>
+        <div class="col l4 offset-l2 s12">
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      2024 | Jhian Villanueva
+      </div>
+    </div>
+  </footer>
+
+
+</html>
