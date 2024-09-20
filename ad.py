@@ -25,7 +25,7 @@ root.title("File Copier")
 
 label1 = tk.Label(text="Pick your photos; maximumu of 3 Ads")
 label1.pack()
-label2 = tk.Label(text="Preferred Resolution is 964 x 1445 | Portrait")
+label2 = tk.Label(text="Preferred Resolution is 1000 x 1000 | Portrait")
 label2.pack()
 
 # Create buttons to trigger the file selection and copying
